@@ -30,7 +30,7 @@ std::string NewProjectTool::Name() const
 
 std::string NewProjectTool::Title() const
 {
-   return "New Project";
+   return "新建项目";
 }
 
 std::string NewProjectTool::Description() const

@@ -27,7 +27,7 @@ std::string OpenFileTool::Name() const
 
 std::string OpenFileTool::Title() const
 {
-   return "Open File";
+   return "打开文件";
 }
 
 std::string OpenFileTool::Description() const

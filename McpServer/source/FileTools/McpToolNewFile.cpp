@@ -24,7 +24,7 @@ std::string NewFileTool::Name() const
 
 std::string NewFileTool::Title() const
 {
-   return "New File";
+   return "新建文件";
 }
 
 std::string NewFileTool::Description() const

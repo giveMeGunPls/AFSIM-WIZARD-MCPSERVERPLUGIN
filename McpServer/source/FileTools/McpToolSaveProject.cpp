@@ -26,7 +26,7 @@ std::string SaveProjectTool::Name() const
 
 std::string SaveProjectTool::Title() const
 {
-   return "Save Project";
+   return "保存项目";
 }
 
 std::string SaveProjectTool::Description() const

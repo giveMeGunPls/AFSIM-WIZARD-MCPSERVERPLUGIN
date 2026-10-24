@@ -44,7 +44,7 @@ std::string SaveAllTool::Name() const
 
 std::string SaveAllTool::Title() const
 {
-   return "Save All";
+   return "全部保存";
 }
 
 std::string SaveAllTool::Description() const

@@ -63,36 +63,36 @@ std::string AddPlatformTool::Name() const
 
 std::string AddPlatformTool::Title() const
 {
-   return "Add platform";
+   return "添加平台";
 }
 
 std::string AddPlatformTool::Description() const
 {
-   return "Append a platform definition to a script file of the scenario currently open in AFSIM Wizard. "
-          "The platform becomes part of the scenario after Wizard reparses the script.";
+   return "把平台定义追加到 AFSIM Wizard 当前打开的想定的脚本文件中。"
+          "Wizard 重新解析脚本后，该平台即成为想定的一部分。";
 }
 
 std::vector<ToolParameter> AddPlatformTool::Parameters() const
 {
    return {
-      {"name", "Unique platform name (no spaces, '/', or '#').", true},
-      {"type", "Existing platform type name in the scenario.", true},
+      {"name", "唯一的平台名称（不能包含空格、'/' 或 '#'）。", true},
+      {"type", "想定中已存在的平台类型名称。", true},
       {"file",
-       "Target script file, absolute or relative to the project directory. "
-       "Defaults to the file containing the most platform definitions.",
+       "目标脚本文件，可为绝对路径或相对于项目目录的路径。"
+       "缺省使用包含平台定义最多的文件。",
        false},
       {"latitude",
-       "Latitude in AFSIM notation, e.g. '27:52:46.72' or '27.8'. Requires longitude.",
+       "AFSIM 格式的纬度，如 '27:52:46.72' 或 '27.8'。须同时提供经度。",
        false},
       {"longitude",
-       "Longitude in AFSIM notation, e.g. '118:01:01.03' or '118.0'. Requires latitude.",
+       "AFSIM 格式的经度，如 '118:01:01.03' 或 '118.0'。须同时提供纬度。",
        false},
-      {"side", "Side name, e.g. 'blue'.", false},
-      {"icon", "Icon name, e.g. 'F-16'.", false},
-      {"altitude", "Altitude with unit, e.g. '10000 m'.", false},
-      {"heading", "Heading with unit, e.g. '90 deg'.", false},
-      {"pitch", "Pitch with unit, e.g. '0 deg'.", false},
-      {"roll", "Roll with unit, e.g. '0 deg'.", false},
+      {"side", "阵营名称，如 'blue'。", false},
+      {"icon", "图标名称，如 'F-16'。", false},
+      {"altitude", "带单位的高度，如 '10000 m'。", false},
+      {"heading", "带单位的航向，如 '90 deg'。", false},
+      {"pitch", "带单位的俯仰角，如 '0 deg'。", false},
+      {"roll", "带单位的滚转角，如 '0 deg'。", false},
    };
 }
 

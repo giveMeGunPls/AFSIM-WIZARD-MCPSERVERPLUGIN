@@ -11,12 +11,13 @@ plugin_cmakelists_template(WizMcpServer wizard
                            LIBRARIES wizard_core wkf_common)
 
 # 模板中的 file(GLOB) 不递归子目录，这里补充各工具子目录（FileTools、PlatformTools 等）中的源码
-file(GLOB MCP_TOOL_SUBDIRS LIST_DIRECTORIES true "${CMAKE_CURRENT_SOURCE_DIR}/*")
+# CONFIGURE_DEPENDS 让新增子目录或源文件在下次构建时自动重新配置，无需手工重跑 CMake
+file(GLOB MCP_TOOL_SUBDIRS LIST_DIRECTORIES true CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*")
 set(MCP_TOOL_SUBDIR_SOURCES "")
 set(MCP_TOOL_SUBDIR_INCLUDES "")
 foreach(MCP_TOOL_SUBDIR ${MCP_TOOL_SUBDIRS})
    if(IS_DIRECTORY "${MCP_TOOL_SUBDIR}")
-      file(GLOB_RECURSE MCP_TOOL_SOURCES
+      file(GLOB_RECURSE MCP_TOOL_SOURCES CONFIGURE_DEPENDS
            "${MCP_TOOL_SUBDIR}/*.cpp"
            "${MCP_TOOL_SUBDIR}/*.hpp")
       list(APPEND MCP_TOOL_SUBDIR_SOURCES ${MCP_TOOL_SOURCES})

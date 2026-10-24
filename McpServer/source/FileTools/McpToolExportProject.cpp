@@ -44,7 +44,7 @@ std::string ExportProjectTool::Name() const
 
 std::string ExportProjectTool::Title() const
 {
-   return "Export Project";
+   return "导出项目";
 }
 
 std::string ExportProjectTool::Description() const

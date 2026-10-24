@@ -30,7 +30,7 @@ std::string PrintFileTool::Name() const
 
 std::string PrintFileTool::Title() const
 {
-   return "Print File";
+   return "打印文件";
 }
 
 std::string PrintFileTool::Description() const

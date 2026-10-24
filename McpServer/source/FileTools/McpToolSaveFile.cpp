@@ -24,7 +24,7 @@ std::string SaveFileTool::Name() const
 
 std::string SaveFileTool::Title() const
 {
-   return "Save File";
+   return "保存文件";
 }
 
 std::string SaveFileTool::Description() const

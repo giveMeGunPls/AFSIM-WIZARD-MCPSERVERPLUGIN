@@ -30,10 +30,13 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "ConfigTools/McpConfigTools.hpp"
 #include "FileTools/McpFileTools.hpp"
+#include "McpParseTools.hpp"
 #include "McpScenarioTools.hpp"
 #include "McpToolRegistry.hpp"
 #include "McpToolServer.hpp"
+#include "StartupTools/McpStartupTools.hpp"
 
 namespace
 {
@@ -200,7 +203,10 @@ void McpServerDock::StartServer()
    // 注册表由服务线程与 GUI 线程共享，工具对象在服务启动前一次性登记完成
    std::shared_ptr<ToolRegistry> registry = std::make_shared<ToolRegistry>();
    RegisterScenarioTools(*registry);
+   RegisterConfigTools(*registry);
    RegisterFileTools(*registry);
+   RegisterParseTools(*registry);
+   RegisterStartupTools(*registry);
 
    // 按值捕获停止标志和注册表，避免服务线程在停止过程中读到已重置的成员
    const std::shared_ptr<std::atomic<bool>> abortFlag = mAbortFlag;

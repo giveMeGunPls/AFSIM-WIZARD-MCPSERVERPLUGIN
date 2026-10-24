@@ -24,7 +24,7 @@ std::string CloseProjectTool::Name() const
 
 std::string CloseProjectTool::Title() const
 {
-   return "Close Project";
+   return "关闭项目";
 }
 
 std::string CloseProjectTool::Description() const

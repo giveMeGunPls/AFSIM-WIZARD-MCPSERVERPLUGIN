@@ -33,14 +33,14 @@ std::string ListPlatformTypesTool::Name() const
 
 std::string ListPlatformTypesTool::Title() const
 {
-   return "List platform types";
+   return "列出平台类型";
 }
 
 std::string ListPlatformTypesTool::Description() const
 {
-   return "List platform types available in the scenario currently open in AFSIM Wizard, "
-          "including built-in types and script-defined platform_type names, plus existing "
-          "platform names and the default target script file.";
+   return "列出 AFSIM Wizard 当前打开的想定中可用的平台类型，"
+          "包括内置类型与脚本定义的 platform_type 名称，"
+          "以及已有平台名称和默认目标脚本文件。";
 }
 
 ToolTextResult ListPlatformTypesTool::Execute(const ToolArguments&) const
