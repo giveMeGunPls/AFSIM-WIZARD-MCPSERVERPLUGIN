@@ -20,9 +20,11 @@
 #include "PlatformTools/McpToolDeletePlatform.hpp"
 #include "PlatformTools/McpToolFindPlatform.hpp"
 #include "PlatformTools/McpToolFindZone.hpp"
+#include "PlatformTools/McpToolListIcons.hpp"
 #include "PlatformTools/McpToolListPlatformParts.hpp"
 #include "PlatformTools/McpToolListPlatformPartTypes.hpp"
 #include "PlatformTools/McpToolListPlatformTypes.hpp"
+#include "PlatformTools/McpToolListSides.hpp"
 #include "PlatformTools/McpToolRemovePlatformPart.hpp"
 #include "PlatformTools/McpToolRemoveRoute.hpp"
 #include "PlatformTools/McpToolRemoveWaypoint.hpp"
@@ -41,6 +43,10 @@ void RegisterScenarioTools(ToolRegistry& aRegistry)
    aRegistry.Register(std::make_unique<ClonePlatformTool>());
    aRegistry.Register(std::make_unique<FindPlatformTool>());
    aRegistry.Register(std::make_unique<SetPlatformAttributesTool>());
+
+   // 平台资源：阵营与图标（数据源与 PlatformData 插件的下拉框一致）
+   aRegistry.Register(std::make_unique<ListSidesTool>());
+   aRegistry.Register(std::make_unique<ListIconsTool>());
 
    // 平台部件
    aRegistry.Register(std::make_unique<ListPlatformPartTypesTool>());

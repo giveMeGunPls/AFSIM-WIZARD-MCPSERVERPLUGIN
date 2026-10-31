@@ -1,18 +1,18 @@
 # McpServer 工具清单
 
 > 统计范围：`wizard/plugins/McpServer/source` 下所有通过 `aRegistry.Register(...)` 注册的 `McpTool` 子类。
-> 当前共 **5 个领域、39 个工具**。
+> 当前共 **5 个领域、41 个工具**。
 
 ## 1. 总览
 
 | 领域 | 目录 | 注册函数 | 工具数 |
 | --- | --- | --- | --- |
 | 文件与项目 | `source/FileTools` | `RegisterFileTools` | 10 |
-| 场景与平台 | `source/PlatformTools` | `RegisterScenarioTools` | 18 |
+| 场景与平台 | `source/PlatformTools` | `RegisterScenarioTools` | 20 |
 | 解析校验 | `source/ParseTools` | `RegisterParseTools` | 1 |
 | 启动文件 | `source/StartupTools` | `RegisterStartupTools` | 6 |
 | 全局仿真配置 | `source/ConfigTools` | `RegisterConfigTools` | 4 |
-| **合计** | | | **39** |
+| **合计** | | | **41** |
 
 注册入口在 [McpServerDock.cpp](file:///e:/afsim/swdev_XY/swdev/src/wizard/plugins/McpServer/source/McpServerDock.cpp#L204-L209)，五个领域注册函数按顺序调用；工具元数据由 [McpToolRegistry.cpp](file:///e:/afsim/swdev_XY/swdev/src/wizard/plugins/McpServer/source/McpToolRegistry.cpp#L182-L200) 统一铺进 MCP `ServerBuilder`。
 
@@ -33,7 +33,7 @@
 
 实现文件：`FileTools/McpTool*.cpp`，公共路径校验在 `FileTools/McpFileToolSupport.*`。
 
-## 3. 场景与平台（18 个）
+## 3. 场景与平台（20 个）
 
 ### 3.1 平台（6 个）
 
@@ -79,11 +79,20 @@
 - 航线类工具的 `scope` 缺省为 `platform`，全局航线需 `scope: "global"` 并由 `route` 指定名称。
 - 这些工具只改脚本原文（追加或区间替换），由 Wizard 重新解析生成场景对象，不操作 GUI 对象。
 
+### 3.5 平台资源（2 个）
+
+| # | 工具名 | 作用 | 参数（必填加粗） |
+| --- | --- | --- | --- |
+| 29 | `list_sides` | 列出平台数据面板中可选的阵营（side）名称 | `side`（可选，只查询单个阵营） |
+| 30 | `list_icons` | 按分类列出模型数据库中全部图标（icon）名称 | `category`（可选，只查询单个分类） |
+
+说明：`list_sides` 的阵营名直接取自 `UtColor::GetColorMap()`；`list_icons` 取自 `VaModelDatabase` 的模型定义并按 `VaModelDefinition::GetCategories()` 分组，未设置分类的图标归入 `uncategorized`。两者与 PlatformData 插件中 Side / Icon 下拉框的数据源一致，但均不依赖已打开的项目。
+
 ## 4. 解析校验（1 个）
 
 | # | 工具名 | 作用 | 参数（必填加粗） |
 | --- | --- | --- | --- |
-| 29 | `validate_input` | 用当前项目语法定义独立解析一段 AFSIM 输入块，返回无法匹配的命令 | **`input`**（保留首尾空白） |
+| 31 | `validate_input` | 用当前项目语法定义独立解析一段 AFSIM 输入块，返回无法匹配的命令 | **`input`**（保留首尾空白） |
 
 说明：使用独立 `WsfParser` 在内存文档上解析，不读写文件、不改场景。仅校验输入块语法，脚本函数体（`script ... end_script`）不在校验范围内。
 
@@ -91,12 +100,12 @@
 
 | # | 工具名 | 作用 | 参数（必填加粗） |
 | --- | --- | --- | --- |
-| 30 | `get_startup_files` | 列出启动文件（顺序、主文件标记、路径、是否存在） | 无 |
-| 31 | `get_current_startup_file` | 返回主启动文件（列表第 1 项） | 无 |
-| 32 | `set_current_startup_file` | 用单个文件替换启动文件列表 | **`file`**、`save`（缺省 true） |
-| 33 | `add_startup_file` | 追加到启动文件列表末尾 | **`file`**、`save`（缺省 true） |
-| 34 | `remove_startup_file` | 从列表移除一项；不允许移除唯一项 | **`file`**、`save`（缺省 true） |
-| 35 | `set_startup_files` | 按顺序整体替换列表 | **`files`**（每行一个，不允许重复）、`save`（缺省 true） |
+| 32 | `get_startup_files` | 列出启动文件（顺序、主文件标记、路径、是否存在） | 无 |
+| 33 | `get_current_startup_file` | 返回主启动文件（列表第 1 项） | 无 |
+| 34 | `set_current_startup_file` | 用单个文件替换启动文件列表 | **`file`**、`save`（缺省 true） |
+| 35 | `add_startup_file` | 追加到启动文件列表末尾 | **`file`**、`save`（缺省 true） |
+| 36 | `remove_startup_file` | 从列表移除一项；不允许移除唯一项 | **`file`**、`save`（缺省 true） |
+| 37 | `set_startup_files` | 按顺序整体替换列表 | **`files`**（每行一个，不允许重复）、`save`（缺省 true） |
 
 说明：直接读写 `wizard::Project` 的启动文件列表，不接触 UI；`save=false` 只改内存。
 
@@ -104,10 +113,10 @@
 
 | # | 工具名 | 作用 | 参数（必填加粗） |
 | --- | --- | --- | --- |
-| 36 | `set_log_file` | 生成 `log_file <path>` | **`path`**、`file`（缺省主启动文件） |
-| 37 | `set_event_output` | 生成 `event_output ... end_event_output` 块 | **`path`**、`file` |
-| 38 | `set_event_pipe` | 生成 `event_pipe ... end_event_pipe` 块 | **`path`**、`preset`（缺省 `full`）、`file` |
-| 39 | `set_end_time` | 生成 `end_time <time>` | **`time`**（如 `1 hour`）、`file` |
+| 38 | `set_log_file` | 生成 `log_file <path>` | **`path`**、`file`（缺省主启动文件） |
+| 39 | `set_event_output` | 生成 `event_output ... end_event_output` 块 | **`path`**、`file` |
+| 40 | `set_event_pipe` | 生成 `event_pipe ... end_event_pipe` 块 | **`path`**、`preset`（缺省 `full`）、`file` |
+| 41 | `set_end_time` | 生成 `end_time <time>` | **`time`**（如 `1 hour`）、`file` |
 
 说明：单行命令已有同名顶层命令时就地替换；`event_output` / `event_pipe` 已有顶层块时只更新 `file`（及 `use_preset`）参数行，保留块内其他设置。
 

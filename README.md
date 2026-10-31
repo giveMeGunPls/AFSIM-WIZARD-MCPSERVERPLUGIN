@@ -99,7 +99,7 @@ Wizard 的构建系统会自动纳入，无需在主 CMake 中手动 `add_subdir
 
 工具按领域分目录存放：`source/FileTools`（文件与项目操作）、`source/PlatformTools`
 （场景平台操作）、`source/ParseTools`（解析校验）、`source/StartupTools`（启动文件）、
-`source/ConfigTools`（全局仿真配置）。目前共 **39 个工具**（文件 10、平台 18、解析 1、
+`source/ConfigTools`（全局仿真配置）。目前共 **41 个工具**（文件 10、平台 20、解析 1、
 启动文件 6、全局配置 4），逐项参数与约束见 [MCP工具清单.md](MCP工具清单.md)。
 所有文件路径参数都必须在**当前项目目录内**，绝对路径或 `..` 越界会被拒绝。
 
@@ -128,6 +128,13 @@ Wizard 的构建系统会自动纳入，无需在主 CMake 中手动 `add_subdir
 | `clone_platform` | 复制平台定义并改名后追加到同一脚本 | `name`（必填）、`new_name` |
 | `find_platform` | 返回平台所在文件、行号、类型与定义原文 | `name`（必填） |
 | `set_platform_attributes` | 就地修改平台顶层属性行 | `name`（必填）、`side`、`icon`、`latitude`、`longitude`、`altitude`、`heading`、`pitch`、`roll` |
+
+平台资源（数据源与 PlatformData 插件的 Side / Icon 下拉框一致，不依赖已打开的项目）：
+
+| 工具名 | 作用 | 参数 |
+| --- | --- | --- |
+| `list_sides` | 列出可选的阵营（side）名称，即颜色表中的颜色名 | `side`（可选，只查询单个阵营） |
+| `list_icons` | 按分类列出模型数据库中的图标（icon）名称 | `category`（可选，只查询单个分类；未分类的图标归入 `uncategorized`） |
 
 平台部件：
 
